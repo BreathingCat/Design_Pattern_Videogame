@@ -1,6 +1,9 @@
 package character;
 
 import java.util.*;
+import java.io.*;
+import armor.*;
+import weapon.*;
 
 public class Paladin extends Character {
 
@@ -38,8 +41,7 @@ public class Paladin extends Character {
 
 	@Override
 	public Map<String, Integer> getWeaponSkills() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.stats.get("weapon_skills");
 	}
 
 	@Override
