@@ -9,10 +9,11 @@ public abstract class Character {
 
 	protected String name = "Unnamed";
 	
-	public Map<String, Map<String, Integer>> stats = new Hashtable<String, Map<String, Integer>> () {{
-		put("attributes", new Hashtable<String, Integer>());
-		put("weapon_skills", new Hashtable<String, Integer>());
-		put("combat_skills", new Hashtable<String, Integer>());
+	// Character stats, subdivided in ATTR, WEAPON SKILLS and COMBAT SKILLS
+	protected Map<String, Map<String, Integer>> stats = new HashMap<String, Map<String, Integer>> () {{
+		put("attributes", new HashMap<String, Integer>());
+		put("weapon_skills", new HashMap<String, Integer>());
+		put("combat_skills", new HashMap<String, Integer>());
 		
 		try {
 			
@@ -49,10 +50,11 @@ public abstract class Character {
 		}
 	}};
 	
+	// Health
+	public Body_Health health = null;
 	
-	protected Body_Health health = new Body_Health();
-	
-	protected Map<String, Armor> equipment = new Hashtable<String, Armor> () {{
+	// Armor
+	public Map<String, Armor> equipment = new HashMap<String, Armor> () {{
 		put("head", null);
 		put("torso", null);
 		put("arms", null);
@@ -60,7 +62,11 @@ public abstract class Character {
 		put("feet", null);
 	}};
 	
-	protected Weapon main_weapon = null;
-	protected Weapon secondary_weapon = null;
+	// Weapons
+	public Weapon main_weapon = null;
+	public Weapon side_weapon = null;
 	
+	public abstract Map<String, Integer> getAttributes ();
+	public abstract Map<String, Integer> getWeaponSkills ();
+	public abstract Map<String, Integer> getCombatSkills ();
 }
