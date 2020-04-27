@@ -1,11 +1,18 @@
 package armor;
 
+import java.util.*;
+
 public class Factory_Heavy_Armor implements Abstract_Factory_Armor {
 
 	@Override
 	public Armor getHeadArmor() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Head_Armor("heavy", 29, 52, 100, 
+				new HashMap<String, Integer> () {{
+					put("PERCEPTION", (-20));
+				}},
+				new HashMap<String, Integer> () {{
+					put("ATTACK", (-4));
+				}});
 	}
 
 	@Override
