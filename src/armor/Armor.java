@@ -67,10 +67,6 @@ public abstract class Armor {
 	public int getBluntResistance() {
 		return blunt_resistance;
 	}
-
-	public void setBluntResistance(int blunt_resistance) {
-		this.blunt_resistance = blunt_resistance;
-	}
 	
 
 	public int getCut_resistance() {
@@ -85,17 +81,8 @@ public abstract class Armor {
 		return coverage;
 	}
 	
-
-	public void setCoverage(int coverage) {
-		this.coverage = coverage;
-	}
-	
 	public int getCutResistance() {
 		return this.cut_resistance;
-	}
-	
-	public void setCutResitance(int cut_resistance) {
-		this.cut_resistance = cut_resistance;
 	}
 	
 	public String getType() {
@@ -106,14 +93,15 @@ public abstract class Armor {
 		return this.body_part;
 	}
 	
-	
 	public Map<String, Integer> getAttributesModifier() {
 		return this.stats_modifier.get("attributes");
 	}
 	
+	
 	public Map<String, Integer> getCombatSkillsModifier() {
 		return this.stats_modifier.get("combat_skills");
 	}
+	
 	
 	public void setAttributesModifier(Map<String, Integer> attributes) {
 		for(Map.Entry<String, Integer> pair : attributes.entrySet()) {
