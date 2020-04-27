@@ -16,8 +16,8 @@ public class Arm_Armor extends Armor {
 		this.type = type;
 	}
 	
-	public Arm_Armor(String type, int blunt_resistance, int cut_resistance, int coverage, Map<String, Integer> attributes, Map<String, Integer> combat_skills) {
-		super(blunt_resistance, cut_resistance, coverage, attributes, combat_skills);
+	public Arm_Armor(String type, int blunt_resistance, int cut_resistance, int coverage, Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Integer> weapon_skills) {
+		super(blunt_resistance, cut_resistance, coverage, attributes, combat_skills, weapon_skills);
 		this.body_part = "arm";
 		this.type = type;
 	}

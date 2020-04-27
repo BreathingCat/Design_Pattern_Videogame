@@ -8,11 +8,15 @@ public class Factory_Heavy_Armor implements Abstract_Factory_Armor {
 	public Armor getHeadArmor() {
 		return new Head_Armor("heavy", 29, 52, 100, 
 				new HashMap<String, Integer> () {{
-					put("PERCEPTION", (-20));
+					
 				}},
 				new HashMap<String, Integer> () {{
-					put("ATTACK", (-4));
-				}});
+					put("ATTACK", (-2));
+				}},
+				new HashMap<String, Integer> () {{
+					
+				}}
+				);
 	}
 
 	@Override

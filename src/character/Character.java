@@ -57,7 +57,7 @@ public abstract class Character {
 	public Map<String, Armor> equipment = new HashMap<String, Armor> () {{
 		put("head", null);
 		put("torso", null);
-		put("arm", null);
+		// put("arm", null);
 		put("leg", null);
 		put("boot", null);
 	}};

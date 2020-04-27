@@ -8,6 +8,7 @@ public abstract class Armor {
 	protected Map<String, Map<String, Integer>> stats_modifier = new HashMap <String, Map<String, Integer>> () {{
 		put("attributes", new HashMap<String, Integer> ());
 		put("combat_skills", new HashMap<String, Integer> ());
+		put("weapon_skills", new HashMap<String, Integer> ());
 	}};
 	
 	protected int blunt_resistance = 0;
@@ -25,7 +26,7 @@ public abstract class Armor {
 		this.coverage = coverage;
 	}
 	
-	public Armor(int blunt_resistance, int cut_resistance, int coverage, Map<String, Integer> attributes, Map<String, Integer> combat_skills) {
+	public Armor(int blunt_resistance, int cut_resistance, int coverage, Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Integer> weapon_skills) {
 		
 		this(blunt_resistance, cut_resistance, coverage);
 		
@@ -36,6 +37,11 @@ public abstract class Armor {
 		for(Map.Entry<String, Integer> pair : combat_skills.entrySet()) {
 			this.stats_modifier.get("combat_skills").put(pair.getKey(), pair.getValue());
 		}
+		
+		for(Map.Entry<String, Integer> pair : weapon_skills.entrySet()) {
+			this.stats_modifier.get("weapon_skills").put(pair.getKey(), pair.getValue());
+		} 
+
 	}
 
 	public int getBluntResistance() {
@@ -75,6 +81,10 @@ public abstract class Armor {
 		return this.stats_modifier.get("combat_skills");
 	}
 	
+	public Map<String, Integer> getWeaponSkillsModifier() {
+		return this.stats_modifier.get("weapon_skills");
+	}
+	
 	
 	public void setAttributesModifier(Map<String, Integer> attributes) {
 		for(Map.Entry<String, Integer> pair : attributes.entrySet()) {
@@ -85,6 +95,12 @@ public abstract class Armor {
 	public void setCombatSkillsModifier(Map<String, Integer> combat_skills) {
 		for(Map.Entry<String, Integer> pair : combat_skills.entrySet()) {
 			this.stats_modifier.get("combat_skills").put(pair.getKey(), pair.getValue());
+		} 
+	}
+	
+	public void setWeaponSkillsModifier(Map<String, Integer> weapon_skills) {
+		for(Map.Entry<String, Integer> pair : weapon_skills.entrySet()) {
+			this.stats_modifier.get("weapon_skills").put(pair.getKey(), pair.getValue());
 		} 
 	}
 	
