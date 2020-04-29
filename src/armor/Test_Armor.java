@@ -1,9 +1,11 @@
 package armor;
 
+import java.util.*;
 import org.json.simple.parser.*;
 import org.json.simple.*;
 
 import java.io.*;
+import java.util.Map;
 
 
 public class Test_Armor {
@@ -12,8 +14,13 @@ public class Test_Armor {
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject json = (JSONObject)parser.parse(new FileReader("src/armor/stats/HEAVY_ARMOR.txt"));
-			System.out.println(((JSONObject)(json.get("HEAD_ARMOR"))).get("CUT_RESISTANCE"));
-			System.out.println(json.entrySet().getClass());
+			
+			for (Iterator it = json.keySet().iterator(); it.hasNext();) {
+				
+				String key = (String) it.next();
+				System.out.println(key);
+				System.out.println(json.get(key));
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
