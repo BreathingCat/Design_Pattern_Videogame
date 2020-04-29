@@ -6,6 +6,6 @@ public interface Abstract_Factory_Armor {
 	Armor getTorsoArmor();
 	Armor getArmArmor();
 	Armor getLegArmor();
-	Armor getFeetArmor();
+	Armor getBootArmor();
 	
 }
