@@ -14,20 +14,12 @@ public class Test_Armor {
 
 	
 	public static void main(String[] args) {
-		JSONParser parser = new JSONParser();
-		try {
-			JSONObject json = (JSONObject)parser.parse(new FileReader("src/armor/stats/HEAVY_ARMOR.txt"));
-			
-			for (Iterator it = json.keySet().iterator(); it.hasNext();) {
-				
-				String key = (String) it.next();
-				System.out.println(key);
-				System.out.println(json.get(key));
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		Factory_Heavy_Armor fac = new Factory_Heavy_Armor();
+		
+		Armor head = fac.getHeadArmor();
+		
+		System.out.println(head.getCombatSkillsModifier().toString());
 		
 
 	}

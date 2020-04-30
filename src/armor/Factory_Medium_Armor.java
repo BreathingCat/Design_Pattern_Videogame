@@ -22,15 +22,15 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the medium head armor
 			// Overengineered, yes, but more memory-efficient
 			return new Head_Armor("medium", 
-					(Integer)head_armor_json.get("BLUNT_RESISTANCE"),
-					(Integer)head_armor_json.get("CUT_RESISTANCE"), 
-					(Integer)head_armor_json.get("COVERAGE"), 
+					((Long)head_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)head_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)head_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)head_armor_json.get("ATTRIBUTES");
 						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)attributes_json.get(key));
+							put(key, ((Long)attributes_json.get(key)).intValue());
 						}
 					}},
 					// Combat skills
@@ -38,7 +38,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject combat_skills_json = (JSONObject)head_armor_json.get("COMBAT_SKILLS");
 						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)combat_skills_json.get(key));
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
 						}
 					}},
 					// Weapon skills
@@ -46,7 +46,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject weapon_skills_json = (JSONObject)head_armor_json.get("WEAPON_SKILLS");
 						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)weapon_skills_json.get(key));
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
 						}
 					}}
 					);
@@ -73,15 +73,15 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the medium torso armor
 			// Overengineered, yes, but more memory-efficient
 			return new Torso_Armor("medium", 
-					(Integer)torso_armor_json.get("BLUNT_RESISTANCE"),
-					(Integer)torso_armor_json.get("CUT_RESISTANCE"), 
-					(Integer)torso_armor_json.get("COVERAGE"), 
+					((Long)torso_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)torso_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)torso_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)torso_armor_json.get("ATTRIBUTES");
 						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)attributes_json.get(key));
+							put(key, ((Long)attributes_json.get(key)).intValue());
 						}
 					}},
 					// Combat skills
@@ -89,7 +89,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject combat_skills_json = (JSONObject)torso_armor_json.get("COMBAT_SKILLS");
 						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)combat_skills_json.get(key));
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
 						}
 					}},
 					// Weapon skills
@@ -97,7 +97,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject weapon_skills_json = (JSONObject)torso_armor_json.get("WEAPON_SKILLS");
 						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)weapon_skills_json.get(key));
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
 						}
 					}}
 					);
@@ -124,15 +124,15 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the medium leg armor
 			// Overengineered, yes, but more memory-efficient
 			return new Leg_Armor("medium", 
-					(Integer)leg_armor_json.get("BLUNT_RESISTANCE"),
-					(Integer)leg_armor_json.get("CUT_RESISTANCE"), 
-					(Integer)leg_armor_json.get("COVERAGE"), 
+					((Long)leg_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)leg_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)leg_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)leg_armor_json.get("ATTRIBUTES");
 						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)attributes_json.get(key));
+							put(key, ((Long)attributes_json.get(key)).intValue());
 						}
 					}},
 					// Combat skills
@@ -140,7 +140,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject combat_skills_json = (JSONObject)leg_armor_json.get("COMBAT_SKILLS");
 						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)combat_skills_json.get(key));
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
 						}
 					}},
 					// Weapon skills
@@ -148,7 +148,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject weapon_skills_json = (JSONObject)leg_armor_json.get("WEAPON_SKILLS");
 						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)weapon_skills_json.get(key));
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
 						}
 					}}
 					);
@@ -171,18 +171,18 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 		try {
 			final JSONObject boot_armor_json = (JSONObject)((JSONObject)parser.parse(new FileReader(this.stats_file))).get("BOOT_ARMOR");
 			
-			// Reads JSON file for all attributes of the medium leg armor
+			// Reads JSON file for all attributes of the medium boot armor
 			// Overengineered, yes, but more memory-efficient
 			return new Leg_Armor("medium", 
-					(Integer)boot_armor_json.get("BLUNT_RESISTANCE"),
-					(Integer)boot_armor_json.get("CUT_RESISTANCE"), 
-					(Integer)boot_armor_json.get("COVERAGE"), 
+					((Long)boot_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)boot_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)boot_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)boot_armor_json.get("ATTRIBUTES");
 						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)attributes_json.get(key));
+							put(key, ((Long)attributes_json.get(key)).intValue());
 						}
 					}},
 					// Combat skills
@@ -190,7 +190,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject combat_skills_json = (JSONObject)boot_armor_json.get("COMBAT_SKILLS");
 						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)combat_skills_json.get(key));
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
 						}
 					}},
 					// Weapon skills
@@ -198,7 +198,7 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 						JSONObject weapon_skills_json = (JSONObject)boot_armor_json.get("WEAPON_SKILLS");
 						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
 							String key = (String) it.next();
-							put(key, (Integer)weapon_skills_json.get(key));
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
 						}
 					}}
 					);
@@ -214,7 +214,6 @@ public class Factory_Medium_Armor implements Abstract_Factory_Armor {
 		// If failed trying to read the stats file, it will return null
 		// Must do this since is has to have a return outside the try/catch block
 		return null;
-	
 	}
 
 }
