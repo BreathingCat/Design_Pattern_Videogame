@@ -2,6 +2,8 @@ package character;
 
 import java.util.*;
 import java.io.*;
+import org.json.simple.*;
+import org.json.simple.parser.*;
 import armor.*;
 import weapon.*;
 
@@ -9,10 +11,11 @@ public abstract class Character {
 
 	protected String name = "Unnamed";
 	
+	protected String char_stats = "src/character/stats.txt";
+	
 	// Character stats, subdivided in ATTR, WEAPON SKILLS and COMBAT SKILLS
 	protected Map<String, Map<String, Integer>> stats = new HashMap<String, Map<String, Integer>> () {{
 		put("attributes", new HashMap<String, Integer>());
-		put("weapon_skills", new HashMap<String, Integer>());
 		put("combat_skills", new HashMap<String, Integer>());
 		
 		try {
@@ -25,15 +28,6 @@ public abstract class Character {
 				get("attributes").put(attributes_scanner.nextLine(), 0);
 			}
 			attributes_scanner.close();
-		
-			// Weapon skills
-			File weapon_skills_file = new File("./src/character/weapon_skills.txt");
-			Scanner weapon_skills_scanner = new Scanner(weapon_skills_file);
-			
-			while(weapon_skills_scanner.hasNextLine()) {
-				get("weapon_skills").put(weapon_skills_scanner.nextLine(), 0);
-			}
-			weapon_skills_scanner.close();
 			
 			// Combat skills
 			File combat_skills_file = new File("./src/character/combat_skills.txt");
@@ -57,9 +51,7 @@ public abstract class Character {
 	public Map<String, Armor> equipment = new HashMap<String, Armor> () {{
 		put("head", null);
 		put("torso", null);
-		// put("arm", null);
 		put("leg", null);
-		put("boot", null);
 	}};
 	
 	// Weapons
@@ -67,6 +59,5 @@ public abstract class Character {
 	public Weapon side_weapon = null;
 	
 	public abstract Map<String, Integer> getAttributes ();
-	public abstract Map<String, Integer> getWeaponSkills ();
 	public abstract Map<String, Integer> getCombatSkills ();
 }
