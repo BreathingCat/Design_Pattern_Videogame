@@ -1,29 +1,218 @@
 package armor;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class Factory_Light_Armor implements Abstract_Factory_Armor {
 
+	private String stats_file = "src/armor/stats/LIGHT_ARMOR.txt";
+
 	public Armor getHeadArmor() {
-		// TODO Auto-generated method stub
+		JSONParser parser = new JSONParser();
+		try {
+			final JSONObject head_armor_json = (JSONObject)((JSONObject)parser.parse(new FileReader(this.stats_file))).get("HEAD_ARMOR");
+			
+			// Reads JSON file for all attributes of the light head armor
+			// Overengineered, yes, but more memory-efficient
+			return new Head_Armor("light", 
+					((Long)head_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)head_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)head_armor_json.get("COVERAGE")).intValue(), 
+					// Attributes
+					new HashMap<String, Integer> () {{
+						JSONObject attributes_json = (JSONObject)head_armor_json.get("ATTRIBUTES");
+						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)attributes_json.get(key)).intValue());
+						}
+					}},
+					// Combat skills
+					new HashMap<String, Integer> () {{
+						JSONObject combat_skills_json = (JSONObject)head_armor_json.get("COMBAT_SKILLS");
+						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
+						}
+					}},
+					// Weapon skills
+					new HashMap<String, Integer> () {{
+						JSONObject weapon_skills_json = (JSONObject)head_armor_json.get("WEAPON_SKILLS");
+						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
+						}
+					}}
+					);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		// If failed trying to read the stats file, it will return null
+		// Must do this since is has to have a return outside the try/catch block
 		return null;
+
 	}
 
 	public Armor getTorsoArmor() {
-		// TODO Auto-generated method stub
+		JSONParser parser = new JSONParser();
+		try {
+			final JSONObject torso_armor_json = (JSONObject)((JSONObject)parser.parse(new FileReader(this.stats_file))).get("TORSO_ARMOR");
+			
+			// Reads JSON file for all attributes of the light torso armor
+			// Overengineered, yes, but more memory-efficient
+			return new Torso_Armor("light", 
+					((Long)torso_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)torso_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)torso_armor_json.get("COVERAGE")).intValue(), 
+					// Attributes
+					new HashMap<String, Integer> () {{
+						JSONObject attributes_json = (JSONObject)torso_armor_json.get("ATTRIBUTES");
+						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)attributes_json.get(key)).intValue());
+						}
+					}},
+					// Combat skills
+					new HashMap<String, Integer> () {{
+						JSONObject combat_skills_json = (JSONObject)torso_armor_json.get("COMBAT_SKILLS");
+						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
+						}
+					}},
+					// Weapon skills
+					new HashMap<String, Integer> () {{
+						JSONObject weapon_skills_json = (JSONObject)torso_armor_json.get("WEAPON_SKILLS");
+						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
+						}
+					}}
+					);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		// If failed trying to read the stats file, it will return null
+		// Must do this since is has to have a return outside the try/catch block
 		return null;
-	}
 
-	public Armor getArmArmor() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Armor getLegArmor() {
-		// TODO Auto-generated method stub
+		JSONParser parser = new JSONParser();
+		try {
+			final JSONObject leg_armor_json = (JSONObject)((JSONObject)parser.parse(new FileReader(this.stats_file))).get("LEG_ARMOR");
+			
+			// Reads JSON file for all attributes of the light leg armor
+			// Overengineered, yes, but more memory-efficient
+			return new Leg_Armor("light", 
+					((Long)leg_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)leg_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)leg_armor_json.get("COVERAGE")).intValue(), 
+					// Attributes
+					new HashMap<String, Integer> () {{
+						JSONObject attributes_json = (JSONObject)leg_armor_json.get("ATTRIBUTES");
+						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)attributes_json.get(key)).intValue());
+						}
+					}},
+					// Combat skills
+					new HashMap<String, Integer> () {{
+						JSONObject combat_skills_json = (JSONObject)leg_armor_json.get("COMBAT_SKILLS");
+						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
+						}
+					}},
+					// Weapon skills
+					new HashMap<String, Integer> () {{
+						JSONObject weapon_skills_json = (JSONObject)leg_armor_json.get("WEAPON_SKILLS");
+						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
+						}
+					}}
+					);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		// If failed trying to read the stats file, it will return null
+		// Must do this since is has to have a return outside the try/catch block
 		return null;
 	}
 
 	public Armor getBootArmor() {
-		// TODO Auto-generated method stub
+		JSONParser parser = new JSONParser();
+		try {
+			final JSONObject boot_armor_json = (JSONObject)((JSONObject)parser.parse(new FileReader(this.stats_file))).get("BOOT_ARMOR");
+			
+			// Reads JSON file for all attributes of the light leg armor
+			// Overengineered, yes, but more memory-efficient
+			return new Leg_Armor("light", 
+					((Long)boot_armor_json.get("BLUNT_RESISTANCE")).intValue(),
+					((Long)boot_armor_json.get("CUT_RESISTANCE")).intValue(), 
+					((Long)boot_armor_json.get("COVERAGE")).intValue(), 
+					// Attributes
+					new HashMap<String, Integer> () {{
+						JSONObject attributes_json = (JSONObject)boot_armor_json.get("ATTRIBUTES");
+						for (Iterator it = attributes_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)attributes_json.get(key)).intValue());
+						}
+					}},
+					// Combat skills
+					new HashMap<String, Integer> () {{
+						JSONObject combat_skills_json = (JSONObject)boot_armor_json.get("COMBAT_SKILLS");
+						for (Iterator it = combat_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)combat_skills_json.get(key)).intValue());
+						}
+					}},
+					// Weapon skills
+					new HashMap<String, Integer> () {{
+						JSONObject weapon_skills_json = (JSONObject)boot_armor_json.get("WEAPON_SKILLS");
+						for (Iterator it = weapon_skills_json.keySet().iterator(); it.hasNext();) {
+							String key = (String) it.next();
+							put(key, ((Long)weapon_skills_json.get(key)).intValue());
+						}
+					}}
+					);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		// If failed trying to read the stats file, it will return null
+		// Must do this since is has to have a return outside the try/catch block
 		return null;
 	}
 
