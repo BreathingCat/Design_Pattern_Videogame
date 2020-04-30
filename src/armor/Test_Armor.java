@@ -5,11 +5,14 @@ import org.json.simple.parser.*;
 import org.json.simple.*;
 
 import java.io.*;
-import java.util.Map;
 
+/*
+ * Class used mainly for testing
+ */
 
 public class Test_Armor {
 
+	
 	public static void main(String[] args) {
 		JSONParser parser = new JSONParser();
 		try {
