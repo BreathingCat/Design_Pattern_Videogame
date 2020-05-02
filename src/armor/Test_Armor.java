@@ -19,7 +19,7 @@ public class Test_Armor {
 		
 		Armor head = fac.getHeadArmor();
 		
-		System.out.println(head.getCombatSkillsModifier().toString());
+		System.out.println(head.getAttributesModifier().toString());
 		
 
 	}

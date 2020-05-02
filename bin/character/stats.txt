@@ -1,0 +1,13 @@
+{
+  "ATTRIBUTES": [
+    "STRENGTH",
+    "DEXTERITY",
+    "TOUGHNESS",
+    "PERCEPTION"
+  ],
+  "COMBAT_SKILLS": [
+    "ATTACK",
+    "DEFENSE",
+    "DODGE"
+  ]
+}
