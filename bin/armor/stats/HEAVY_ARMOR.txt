@@ -1,0 +1,38 @@
+{
+  "HEAD_ARMOR": {
+    "COVERAGE": 100,
+    "RESISTANCE": 70,
+    "ATTRIBUTES": {
+      "PERCEPTION": -4
+    },
+    "COMBAT_SKILLS": {
+      "ATTACK": -2,
+      "DEFENSE": 1,
+      "DODGE": -2
+    }
+  },
+  "TORSO_ARMOR": {
+    "COVERAGE": 100,
+    "RESISTANCE": 60,
+    "ATTRIBUTES": {
+      "PERCEPTION": -2,
+      "TOUGHNESS": 2
+    },
+    "COMBAT_SKILLS": {
+      "ATTACK": -1,
+      "DEFENSE": 2,
+      "DODGE": -4
+    }
+  },
+  "LEG_ARMOR": {
+    "COVERAGE": 100,
+    "RESISTANCE": 50,
+    "ATTRIBUTES": {
+      "TOUGHNESS": 1,
+    },
+    "COMBAT_SKILLS": {
+      "DEFENSE": 1,
+      "DODGE": -2
+    }
+  }
+}

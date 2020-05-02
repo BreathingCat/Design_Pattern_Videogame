@@ -15,11 +15,12 @@ public class Paladin extends Character {
 	}};
 
 	public Paladin (String name) {
+		super();
 		this.name = name;
 	}
 	
 	public Paladin (String name, Map<String, Integer> attributes, Map<String, Integer> combat_skills) {
-		this.name = name;
+		this(name);
 		
 		// Update stats dict
 		for (Map.Entry<String, Integer> pair : attributes.entrySet()) {

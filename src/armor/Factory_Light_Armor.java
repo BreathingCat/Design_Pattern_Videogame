@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 public class Factory_Light_Armor implements Abstract_Factory_Armor {
 
-	private String stats_file = "src/armor/stats/LIGHT_ARMOR.txt";
+	private final static String stats_file = "src/armor/stats/LIGHT_ARMOR.txt";
 
 	public Armor getHeadArmor() {
 		JSONParser parser = new JSONParser();
