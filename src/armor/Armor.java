@@ -6,8 +6,8 @@ import java.io.*;
 public abstract class Armor {
 
 	protected Map<String, Map<String, Integer>> stats_modifier = new HashMap <String, Map<String, Integer>> () {{
-		put("attributes", new HashMap<String, Integer> ());
-		put("combat_skills", new HashMap<String, Integer> ());
+		put("ATTRIBUTES", new HashMap<String, Integer> ());
+		put("COMBAT_SKILLS", new HashMap<String, Integer> ());
 	}};
 	
 	protected int resistance = 0;
@@ -27,13 +27,8 @@ public abstract class Armor {
 		
 		this(resistance, coverage);
 		
-		for(Map.Entry<String, Integer> pair : attributes.entrySet()) {
-			this.stats_modifier.get("attributes").put(pair.getKey(), pair.getValue());
-		} 
-		
-		for(Map.Entry<String, Integer> pair : combat_skills.entrySet()) {
-			this.stats_modifier.get("combat_skills").put(pair.getKey(), pair.getValue());
-		}
+		this.setAttributesModifier(attributes);
+		this.setCombatSkillsModifier(combat_skills);
 
 	}
 
@@ -54,23 +49,23 @@ public abstract class Armor {
 	}
 	
 	public Map<String, Integer> getAttributesModifier() {
-		return this.stats_modifier.get("attributes");
+		return this.stats_modifier.get("ATTRIBUTES");
 	}
 	
 	
 	public Map<String, Integer> getCombatSkillsModifier() {
-		return this.stats_modifier.get("combat_skills");
+		return this.stats_modifier.get("COMBAT_SKILLS");
 	}	
 	
-	public void setAttributesModifier(Map<String, Integer> attributes) {
+	private void setAttributesModifier(Map<String, Integer> attributes) {
 		for(Map.Entry<String, Integer> pair : attributes.entrySet()) {
-			this.stats_modifier.get("attributes").put(pair.getKey(), pair.getValue());
+			this.stats_modifier.get("ATTRIBUTES").put(pair.getKey(), pair.getValue());
 		} 
 	}
 	
-	public void setCombatSkillsModifier(Map<String, Integer> combat_skills) {
+	private void setCombatSkillsModifier(Map<String, Integer> combat_skills) {
 		for(Map.Entry<String, Integer> pair : combat_skills.entrySet()) {
-			this.stats_modifier.get("combat_skills").put(pair.getKey(), pair.getValue());
+			this.stats_modifier.get("COMBAT_SKILLS").put(pair.getKey(), pair.getValue());
 		} 
 	}
 	

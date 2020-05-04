@@ -9,5 +9,56 @@
     "ATTACK",
     "DEFENSE",
     "DODGE"
-  ]
+  ],
+  "PALADIN": {
+    "BLEED_MULT": 0.8,
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "STRENGTH": 2,
+        "TOUGHNESS": 2,
+        "PERCEPTION": -5
+      },
+      "COMBAT_SKILLS": {
+        "DEFENSE": 2,
+        "DODGE": -4
+      }
+    },
+    "HEAD": {
+      "MAX_HP": 100,
+      "HP": 100,
+      "BLEED_RATE": 0,
+      "DAMAGED": 0
+    },
+    "TORSO": {
+      "MAX_HP": 150,
+      "HP": 150,
+      "BLEED_RATE": 0,
+      "DAMAGED": 0
+    },
+    "LEFT_ARM": {
+      "MAX_HP": 120,
+      "HP": 120,
+      "BLEED_RATE": 0,
+      "DAMAGED": 0
+    },
+    "": {},
+    "RIGHT_ARM": {
+      "MAX_HP": 120,
+      "HP": 120,
+      "BLEED_RATE": 0,
+      "DAMAGED": 0
+    },
+    "LEFT_LEG": {
+      "MAX_HP": 120,
+      "HP": 120,
+      "BLEED_RATE": 0,
+      "DAMAGED": 0
+    },
+    "RIGHT_LEG": {
+      "MAX_HP": 120,
+      "HP": 120,
+      "BLEED_RATE": 0,
+      "DAMAGED": 0
+    }
+  }
 }
