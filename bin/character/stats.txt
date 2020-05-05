@@ -11,7 +11,7 @@
     "DODGE"
   ],
   "PALADIN": {
-    "BLEED_MULT": 0.8,
+    "BLEED_MULT": "0.8",
     "SKILLS_MULT": {
       "ATTRIBUTES": {
         "STRENGTH": 2,

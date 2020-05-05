@@ -25,37 +25,37 @@ public abstract class Character {
 	public int total_bleed_rate = 0;
 	
 	public Map<String, Map<String, Integer>> body_parts = new HashMap<String, Map<String, Integer>> () {{
-		put("head", new HashMap<String, Integer> ());
-		put("torso", new HashMap<String, Integer> ());
-		put("left_arm", new HashMap<String, Integer> ());
-		put("right_arm", new HashMap<String, Integer> ());
-		put("left_leg", new HashMap<String, Integer> ());
-		put("right_arm", new HashMap<String, Integer> ());
+		put("HEAD", new HashMap<String, Integer> ());
+		put("TORSO", new HashMap<String, Integer> ());
+		put("LEFT_ARM", new HashMap<String, Integer> ());
+		put("RIGHT_ARM", new HashMap<String, Integer> ());
+		put("LEFT_LEG", new HashMap<String, Integer> ());
+		put("RIGHT_LEG", new HashMap<String, Integer> ());
 	}};
 	
 	// Armor
 	public Map<String, Armor> equipment = new HashMap<String, Armor> () {{
-		put("head", null);
-		put("torso", null);
-		put("leg", null);
+		put("HEAD", null);
+		put("TORSO", null);
+		put("LEG", null);
 	}};
 	
 	// Weapons
 	public Weapon main_weapon = null;
 	public Weapon side_weapon = null;
 	
-	public abstract Map<String, Integer> getAttributes ();
-	public abstract Map<String, Integer> getCombatSkills ();
-	
 	// Race
 	public static float racial_bleed_mult = -1;
 	
-	protected static Map<String, Map<String, Integer>> racial_stats_mult = new HashMap<String, Map<String, Integer>> () {{
+	public static Map<String, Map<String, Integer>> racial_stats_mult = new HashMap<String, Map<String, Integer>> () {{
 		put("ATTRIBUTES", new HashMap<String, Integer>());
 		put("COMBAT_SKILLS", new HashMap<String, Integer>());			
 	}};
 	
-	private void getStatsFromFile(String race) {
+	// State
+	protected Character_State state;
+	
+ 	private void getStatsFromFile(String race) {
 		JSONParser parser = new JSONParser();	
 		try {
 			JSONObject json_stats = (JSONObject)parser.parse(new FileReader(Character.char_stats));
@@ -88,11 +88,18 @@ public abstract class Character {
 			}
 			
 			// Health
-			this.racial_bleed_mult = (Long)race_char.get("BLEED_MULT");
+			this.racial_bleed_mult = Float.parseFloat((String)race_char.get("BLEED_MULT"));
 			
-			JSONObject head_health = (JSONObject)race_char.get("HEAD");
+			String[] body_parts_json = new String[] {"HEAD","TORSO","LEFT_ARM","RIGHT_ARM","LEFT_LEG","RIGHT_LEG"};
 			
-			
+			for (String part : body_parts_json) {
+				JSONObject item = (JSONObject)race_char.get(part);
+				for (Iterator it = item.keySet().iterator(); it.hasNext();) {
+					String key = (String) it.next();
+					this.body_parts.get(part).put(key, ((Long)item.get(key)).intValue());
+				}
+			}
+					
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -103,7 +110,7 @@ public abstract class Character {
 		
 	}
 	
-	public Character (String name, String race, Weapon main, Weapon side, Map<String, Integer> attributes, Map<String, Integer> combat_skills) {
+	public Character (String name, String race, Weapon main, Weapon side, Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Armor> equipment) {
 		
 		this.name = name;
 		
@@ -112,13 +119,34 @@ public abstract class Character {
 		
 		this.getStatsFromFile(race);
 		
-		for (Map.Entry<String, Integer> pair : attributes.entrySet()) {
-			this.stats.get("attributes").put(pair.getKey(), pair.getValue());
-		} for (Map.Entry<String, Integer> pair : combat_skills.entrySet()) {
-			this.stats.get("combat_skills").put(pair.getKey(), pair.getValue());
-		} 
+		this.stats.get("ATTRIBUTES").putAll(attributes);
+		this.stats.get("COMBAT_SKILLS").putAll(combat_skills);
+		
+		this.equipment.putAll(equipment);
 		
 	}
+	
+	public Map<String, Integer> getAttributes () {
+		Map<String, Integer> modified_attr = new HashMap(this.stats.get("ATTRIBUTES"));
+		
+		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get("ATTRIBUTES").entrySet()) {
+			modified_attr.put(pair.getKey(), modified_attr.get(pair.getKey()) + this.racial_stats_mult.get("ATTRIBUTES").get(pair.getKey()));
+		}
+		
+		return modified_attr;
+	}
+	
+	public Map<String, Integer> getCombatSkills () {
+		Map<String, Integer> modified_combat_skills = new HashMap(this.stats.get("COMBAT_SKILLS"));
+		
+		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get("COMBAT_SKILLS").entrySet()) {
+			modified_combat_skills.put(pair.getKey(), modified_combat_skills.get(pair.getKey()) + this.racial_stats_mult.get("COMBAT_SKILLS").get(pair.getKey()));
+		}
+		
+		return modified_combat_skills;
+	}
+	
+	
 	
 	// Method for automatically creating a dictionary. Used to simplify code, so
 	// i dont have to do it everytime
