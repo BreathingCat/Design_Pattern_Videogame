@@ -9,7 +9,7 @@ import weapon.*;
 
 public abstract class Character {
 
-	protected String name = "Unnamed";
+	public String name = "Unnamed";
 	
 	protected final static String char_stats = "src/character/stats.txt";
 	
@@ -20,18 +20,8 @@ public abstract class Character {
 	}};
 	
 	// Health
-	public int blood_level = 100;
-	public int max_blood_level = 100;
-	public int total_bleed_rate = 0;
-	
-	public Map<String, Map<String, Integer>> body_parts = new HashMap<String, Map<String, Integer>> () {{
-		put("HEAD", new HashMap<String, Integer> ());
-		put("TORSO", new HashMap<String, Integer> ());
-		put("LEFT_ARM", new HashMap<String, Integer> ());
-		put("RIGHT_ARM", new HashMap<String, Integer> ());
-		put("LEFT_LEG", new HashMap<String, Integer> ());
-		put("RIGHT_LEG", new HashMap<String, Integer> ());
-	}};
+	protected int max_hp = 0;
+	protected int current_hp = 0;
 	
 	// Armor
 	public Map<String, Armor> equipment = new HashMap<String, Armor> () {{
@@ -45,8 +35,6 @@ public abstract class Character {
 	public Weapon side_weapon = null;
 	
 	// Race
-	public static float racial_bleed_mult = -1;
-	
 	public static Map<String, Map<String, Integer>> racial_stats_mult = new HashMap<String, Map<String, Integer>> () {{
 		put("ATTRIBUTES", new HashMap<String, Integer>());
 		put("COMBAT_SKILLS", new HashMap<String, Integer>());			
@@ -55,7 +43,12 @@ public abstract class Character {
 	// State
 	protected Character_State state;
 	
- 	private void getStatsFromFile(String race) {
+	// Pointer to damage calculator
+	protected DAMAGE_CALC_SINGLETON dmg_calculator;
+	
+	// Private function to read character stats from file
+	// To ease the workload on more functions
+  	private void getStatsFromFile(String race) {
 		JSONParser parser = new JSONParser();	
 		try {
 			JSONObject json_stats = (JSONObject)parser.parse(new FileReader(Character.char_stats));
@@ -88,17 +81,8 @@ public abstract class Character {
 			}
 			
 			// Health
-			this.racial_bleed_mult = Float.parseFloat((String)race_char.get("BLEED_MULT"));
-			
-			String[] body_parts_json = new String[] {"HEAD","TORSO","LEFT_ARM","RIGHT_ARM","LEFT_LEG","RIGHT_LEG"};
-			
-			for (String part : body_parts_json) {
-				JSONObject item = (JSONObject)race_char.get(part);
-				for (Iterator it = item.keySet().iterator(); it.hasNext();) {
-					String key = (String) it.next();
-					this.body_parts.get(part).put(key, ((Long)item.get(key)).intValue());
-				}
-			}
+			this.max_hp = ((Long)race_char.get("MAX_HP")).intValue();
+			this.current_hp = this.max_hp;
 					
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -110,7 +94,11 @@ public abstract class Character {
 		
 	}
 	
-	public Character (String name, String race, Weapon main, Weapon side, Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Armor> equipment) {
+	public Character (String name, String race, Weapon main, Weapon side, 
+			Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Armor> equipment,
+			DAMAGE_CALC_SINGLETON dmg_calculator) {
+		
+		this.dmg_calculator = dmg_calculator;
 		
 		this.name = name;
 		
@@ -123,7 +111,7 @@ public abstract class Character {
 		this.stats.get("COMBAT_SKILLS").putAll(combat_skills);
 		
 		this.equipment.putAll(equipment);
-		
+			
 	}
 	
 	public Map<String, Integer> getAttributes () {
@@ -145,9 +133,7 @@ public abstract class Character {
 		
 		return modified_combat_skills;
 	}
-	
-	
-	
+		
 	// Method for automatically creating a dictionary. Used to simplify code, so
 	// i dont have to do it everytime
 	public Map<String, Integer> generateAttributesDict(final int strength, final int dexterity, final int toughness, final int perception) {
@@ -166,5 +152,25 @@ public abstract class Character {
 			put("DEFENSE", defense);
 			put("DODGE", dodge);
 		}};
+	}
+	
+	public void damageCharacter(int damage) {
+		if(this.current_hp - damage < 0 ) {
+			this.current_hp = 0;
+		} else {
+			this.current_hp -= damage;
+		}
+	}
+	
+	public void healCharacter(int heal) {
+		if(this.current_hp + heal > this.max_hp) {
+			this.current_hp = this.max_hp;
+		} else {
+			this.current_hp += heal;
+		}
+	}
+	
+	public int getCurrentHp() {
+		return this.current_hp;
 	}
 }

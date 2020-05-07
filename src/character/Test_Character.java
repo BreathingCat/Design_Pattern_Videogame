@@ -1,6 +1,7 @@
 package character;
 
 import armor.*;
+import races.Paladin;
 import weapon.*;
 
 import java.util.*;
@@ -8,7 +9,9 @@ import java.util.*;
 public class Test_Character {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		DAMAGE_CALC_SINGLETON calc = new DAMAGE_CALC_SINGLETON();
+
 		Map<String, Integer> test_attr = new HashMap<String, Integer> () {{
 			put("STRENGTH", 1);
 			put("DEXTERITY", 1);
@@ -29,11 +32,12 @@ public class Test_Character {
 			put("LEG", fac.getLegArmor());
 		}};	
 		
-		Character test = new Paladin("Test", new BattleHammer(), new Mace(), test_attr, test_combat_skills, equipment);
+		Character test = new Paladin("Test", new BattleHammer(), new Mace(), test_attr, test_combat_skills, equipment, calc);
 		
 		System.out.println(test.stats.get("COMBAT_SKILLS"));
 		System.out.println(test.getCombatSkills());
 		System.out.println(test.equipment.toString());
+		System.out.println(test.current_hp);
 
 	}
 

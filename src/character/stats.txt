@@ -11,7 +11,6 @@
     "DODGE"
   ],
   "PALADIN": {
-    "BLEED_MULT": "0.8",
     "SKILLS_MULT": {
       "ATTRIBUTES": {
         "STRENGTH": 2,
@@ -23,42 +22,48 @@
         "DODGE": -4
       }
     },
-    "HEAD": {
-      "MAX_HP": 100,
-      "HP": 100,
-      "BLEED_RATE": 0,
-      "DAMAGED": 0
+    "MAX_HP": 150
+  },
+  "CLERIC": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "PERCEPTION": -3,
+        "DEXTERITY": -2,
+        "TOUGHNESS": 4
+      },
+      "COMBAT_SKILLS": {
+        "DEFENSE": 2
+        "ATTACK": -3
+      }
     },
-    "TORSO": {
-      "MAX_HP": 150,
-      "HP": 150,
-      "BLEED_RATE": 0,
-      "DAMAGED": 0
+    "MAX_HP": 120
+  },
+  "RANGER": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "STRENGTH": -3,
+        "TOUGHNESS": -2,
+        "PERCEPTION": 4
+      },
+      "COMBAT_SKILLS": {
+        "ATTACK": 5,
+        "DEFENSE": -4,
+        "DODGE": -2
+      }
     },
-    "LEFT_ARM": {
-      "MAX_HP": 120,
-      "HP": 120,
-      "BLEED_RATE": 0,
-      "DAMAGED": 0
+    "MAX_HP": 75
+  },
+  "SOLDIER": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "DEXTERITY": 2
+        "TOUGHNESS": -2
+      },
+      "COMBAT_SKILLS": {
+        "DEFENSE": -2,
+        "DODGE": 2
+      }
     },
-    "": {},
-    "RIGHT_ARM": {
-      "MAX_HP": 120,
-      "HP": 120,
-      "BLEED_RATE": 0,
-      "DAMAGED": 0
-    },
-    "LEFT_LEG": {
-      "MAX_HP": 120,
-      "HP": 120,
-      "BLEED_RATE": 0,
-      "DAMAGED": 0
-    },
-    "RIGHT_LEG": {
-      "MAX_HP": 120,
-      "HP": 120,
-      "BLEED_RATE": 0,
-      "DAMAGED": 0
-    }
-  }
+    "MAX_HP": 100
+  },
 }

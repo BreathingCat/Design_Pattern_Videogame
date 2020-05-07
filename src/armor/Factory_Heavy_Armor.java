@@ -7,7 +7,7 @@ import org.json.simple.parser.*;
 
 public class Factory_Heavy_Armor implements Abstract_Factory_Armor {
 	
-	private final static String stats_file = "src/armor/stats/HEAVY_ARMOR.txt";
+	private final static String stats_file = "src/armor/HEAVY_ARMOR.txt";
 
 	public Armor getHeadArmor() {
 		JSONParser parser = new JSONParser();
