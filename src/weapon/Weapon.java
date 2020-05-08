@@ -49,6 +49,10 @@ public abstract class Weapon {
 	public int getDamage() {
 		return this.damage;
 	}
+	
+	public String getType() {
+		return this.type;
+	}
 
 	public Map<String, Integer> getEffects(){
 		return this.effects;

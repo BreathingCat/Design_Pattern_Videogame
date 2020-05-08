@@ -1,4 +1,6 @@
-package character;
+package state;
+
+import character.Character;
 
 public abstract class Character_State {
 
@@ -27,6 +29,7 @@ public abstract class Character_State {
 	
 	public void effectNextTurn() {
 		if(this.turns_left > 0) {
+			this.execute();
 			this.turns_left--;
 		}
 		
@@ -41,5 +44,13 @@ public abstract class Character_State {
 	}
 	
 	public abstract void execute();
+
+	public int getCombatSkillsModifier() {
+		return 0;
+	}
+
+	public int getAttributesModifier() {
+		return 0;
+	}
 	
 }

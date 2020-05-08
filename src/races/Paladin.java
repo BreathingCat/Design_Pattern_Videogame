@@ -8,10 +8,10 @@ import weapon.*;
 
 public class Paladin extends Character {
 
-	public Paladin (String name, Weapon main, Weapon side, 
+	public Paladin (String name, Weapon main, 
 			Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Armor> equipment,
 			DAMAGE_CALC_SINGLETON dmg_calculator) {
-		super(name, "PALADIN", main, side, attributes, combat_skills, equipment, dmg_calculator);
+		super(name, "PALADIN", main, attributes, combat_skills, equipment, dmg_calculator);
 	}
 	
 }

@@ -5,7 +5,9 @@ import java.io.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import armor.*;
+import state.Character_State;
 import weapon.*;
+import state.*;
 
 public abstract class Character {
 
@@ -32,16 +34,15 @@ public abstract class Character {
 	
 	// Weapons
 	public Weapon main_weapon = null;
-	public Weapon side_weapon = null;
 	
 	// Race
-	public static Map<String, Map<String, Integer>> racial_stats_mult = new HashMap<String, Map<String, Integer>> () {{
+	public Map<String, Map<String, Integer>> racial_stats_mult = new HashMap<String, Map<String, Integer>> () {{
 		put("ATTRIBUTES", new HashMap<String, Integer>());
 		put("COMBAT_SKILLS", new HashMap<String, Integer>());			
 	}};
 	
 	// State
-	protected Character_State state;
+	protected Map<String, Character_State> state;
 	
 	// Pointer to damage calculator
 	protected DAMAGE_CALC_SINGLETON dmg_calculator;
@@ -64,10 +65,11 @@ public abstract class Character {
 			}
 			
 			// Racial data
-			JSONObject race_char = (JSONObject)json_stats.get(race);
+			JSONObject race_char = (JSONObject)json_stats.get(race);		
 			
 			// Racial attributes modifier
 			JSONObject attributes_modifier = (JSONObject)((JSONObject)race_char.get("SKILLS_MULT")).get("ATTRIBUTES");
+			
 			for(Iterator it = attributes_modifier.keySet().iterator(); it.hasNext();) {
 				String key = (String)it.next();
 				this.racial_stats_mult.get("ATTRIBUTES").put(key, ((Long)attributes_modifier.get(key)).intValue());
@@ -75,6 +77,7 @@ public abstract class Character {
 			
 			// Racial combat skills modifier
 			JSONObject combat_skills_modifier = (JSONObject)((JSONObject)race_char.get("SKILLS_MULT")).get("COMBAT_SKILLS");
+			
 			for(Iterator it = combat_skills_modifier.keySet().iterator(); it.hasNext();) {
 				String key = (String)it.next();
 				this.racial_stats_mult.get("COMBAT_SKILLS").put(key, ((Long)combat_skills_modifier.get(key)).intValue());
@@ -94,7 +97,7 @@ public abstract class Character {
 		
 	}
 	
-	public Character (String name, String race, Weapon main, Weapon side, 
+	public Character (String name, String race, Weapon main, 
 			Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Armor> equipment,
 			DAMAGE_CALC_SINGLETON dmg_calculator) {
 		
@@ -103,7 +106,12 @@ public abstract class Character {
 		this.name = name;
 		
 		this.main_weapon = main;
-		this.side_weapon = side;
+		
+		this.state = new HashMap<String, Character_State> ();
+		this.state.put("DISORIENT", new Disoriented_State(this));
+		this.state.put("BLEED", new Bleed_State(this));
+		this.state.put("STUN", new Stunned_State(this));
+		this.state.put("POISON", new Poisoned_State(this));
 		
 		this.getStatsFromFile(race);
 		
@@ -117,8 +125,28 @@ public abstract class Character {
 	public Map<String, Integer> getAttributes () {
 		Map<String, Integer> modified_attr = new HashMap(this.stats.get("ATTRIBUTES"));
 		
+		// Racial modifiers
 		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get("ATTRIBUTES").entrySet()) {
-			modified_attr.put(pair.getKey(), modified_attr.get(pair.getKey()) + this.racial_stats_mult.get("ATTRIBUTES").get(pair.getKey()));
+			modified_attr.put(pair.getKey(), pair.getValue() + modified_attr.get(pair.getKey()));
+		}
+		
+		// Equipment modifiers
+		for(Map.Entry<String, Armor> armor : this.equipment.entrySet()) {
+			for(Map.Entry<String, Integer> pair : this.equipment.get(armor.getKey()).getAttributesModifier().entrySet()) {
+				modified_attr.put(pair.getKey(), pair.getValue() + modified_attr.get(pair.getKey()));
+			}
+		}		
+		
+		// State modifiers
+		for(Map.Entry<String, Character_State> pair : this.state.entrySet()) {
+			if(pair.getValue().getState() && pair.getValue().getAttributesModifier() != 0) {
+				
+				int modifier = pair.getValue().getAttributesModifier();
+				
+				for(Map.Entry<String, Integer> pair_attr : modified_attr.entrySet()) {
+					modified_attr.put(pair_attr.getKey(), pair_attr.getValue() + modifier);
+				}
+			}
 		}
 		
 		return modified_attr;
@@ -127,34 +155,55 @@ public abstract class Character {
 	public Map<String, Integer> getCombatSkills () {
 		Map<String, Integer> modified_combat_skills = new HashMap(this.stats.get("COMBAT_SKILLS"));
 		
+		// Racial modifier
 		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get("COMBAT_SKILLS").entrySet()) {
-			modified_combat_skills.put(pair.getKey(), modified_combat_skills.get(pair.getKey()) + this.racial_stats_mult.get("COMBAT_SKILLS").get(pair.getKey()));
+			modified_combat_skills.put(pair.getKey(), pair.getValue() + modified_combat_skills.get(pair.getKey()));
 		}
 		
+		// Equipment modifiers
+		for(Map.Entry<String, Armor> armor : this.equipment.entrySet()) {
+			for(Map.Entry<String, Integer> pair : this.equipment.get(armor.getKey()).getCombatSkillsModifier().entrySet()) {
+				modified_combat_skills.put(pair.getKey(), pair.getValue() + modified_combat_skills.get(pair.getKey()));
+			}
+		}
+		
+		// State modifiers
+		for(Map.Entry<String, Character_State> pair : this.state.entrySet()) {
+			if(pair.getValue().getState() && pair.getValue().getCombatSkillsModifier() != 0) {
+				
+				int modifier = pair.getValue().getCombatSkillsModifier();
+				
+				for(Map.Entry<String, Integer> pair_combat : modified_combat_skills.entrySet()) {
+					modified_combat_skills.put(pair_combat.getKey(), pair_combat.getValue() + modifier);
+				}
+			}
+		}
 		return modified_combat_skills;
 	}
-		
-	// Method for automatically creating a dictionary. Used to simplify code, so
-	// i dont have to do it everytime
-	public Map<String, Integer> generateAttributesDict(final int strength, final int dexterity, final int toughness, final int perception) {
-		return new HashMap<String, Integer>(){{
-			put("STRENGTH", strength);
-			put("DEXTERITY", dexterity);
-			put("TOUGHNESS", toughness);
-			put("PERCEPTION", perception);
-		}};
+
+	public void stun() {
+		this.state.get("STUN").activate();
 	}
 	
-	// Same as the attributes one
-	public Map<String, Integer> generateCombatSkillsDict(final int attack, final int defense, final int dodge) {
-		return new HashMap<String, Integer>(){{
-			put("ATTACK", attack);
-			put("DEFENSE", defense);
-			put("DODGE", dodge);
-		}};
+	public void disorient() {
+		this.state.get("DISORIENT").activate();
 	}
 	
-	public void damageCharacter(int damage) {
+	public void poison() {
+		this.state.get("POISON").activate();
+	}
+	
+	public void bleed() {
+		this.state.get("BLEED").activate();
+	}
+	
+	public void effectsNextTurn() {
+		for(Map.Entry<String, Character_State> pair : this.state.entrySet()) {
+			pair.getValue().effectNextTurn();
+		}
+	}
+	
+	public void damage(int damage) {
 		if(this.current_hp - damage < 0 ) {
 			this.current_hp = 0;
 		} else {
@@ -162,7 +211,7 @@ public abstract class Character {
 		}
 	}
 	
-	public void healCharacter(int heal) {
+	public void heal(int heal) {
 		if(this.current_hp + heal > this.max_hp) {
 			this.current_hp = this.max_hp;
 		} else {
@@ -172,5 +221,9 @@ public abstract class Character {
 	
 	public int getCurrentHp() {
 		return this.current_hp;
+	}
+	
+	public int getMaxHp() {
+		return this.max_hp;
 	}
 }

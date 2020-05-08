@@ -17,8 +17,6 @@ public class Factory_Heavy_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the heavy head armor
 			// Overengineered, yes, but more memory-efficient
 			return new Head_Armor("heavy", 
-					((Long)head_armor_json.get("RESISTANCE")).intValue(), 
-					((Long)head_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)head_armor_json.get("ATTRIBUTES");
@@ -59,8 +57,6 @@ public class Factory_Heavy_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the heavy torso armor
 			// Overengineered, yes, but more memory-efficient
 			return new Torso_Armor("heavy", 
-					((Long)torso_armor_json.get("RESISTANCE")).intValue(),
-					((Long)torso_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)torso_armor_json.get("ATTRIBUTES");
@@ -101,8 +97,6 @@ public class Factory_Heavy_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the heavy leg armor
 			// Overengineered, yes, but more memory-efficient
 			return new Leg_Armor("heavy", 
-					((Long)leg_armor_json.get("RESISTANCE")).intValue(),
-					((Long)leg_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)leg_armor_json.get("ATTRIBUTES");

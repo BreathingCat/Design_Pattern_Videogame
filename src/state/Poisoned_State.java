@@ -1,11 +1,11 @@
 package state;
 
 import character.Character;
-import character.Character_State;
 
 public class Poisoned_State extends Character_State{
 
 	protected int damage_per_turn = 6;
+	protected int attributes_modifier = -2;
 	
 	public Poisoned_State (Character parent) {
 		super(parent, 2);
@@ -15,12 +15,16 @@ public class Poisoned_State extends Character_State{
 	public void execute() {
 		if(this.activated) {
 			System.out.println(this.parent.name +" is poisoned! All attributes are reduced by 2 and receives " + this.damage_per_turn + " damage per turn");
-			System.out.println("Turns left: " + String.valueOf(this.turns_left));
+			System.out.println("Turns left: " + String.valueOf(this.turns_left - 1));
 		}
 	}
 	
 	public int getDamagePerTurn() {
 		return this.damage_per_turn;
+	}
+	
+	public int getAttributesModifier() {
+		return this.attributes_modifier;
 	}
 	
 }

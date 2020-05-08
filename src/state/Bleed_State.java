@@ -1,7 +1,6 @@
 package state;
 
 import character.Character;
-import character.Character_State;
 
 public class Bleed_State extends Character_State {
 
@@ -15,7 +14,7 @@ public class Bleed_State extends Character_State {
 	public void execute() {
 		if(this.activated) {
 			System.out.println(this.parent.name +" is bleeding! Bleeds for " + this.damage_per_turn + " hp");
-			System.out.println("Turns left: " + String.valueOf(this.turns_left));
+			System.out.println("Turns left: " + String.valueOf(this.turns_left - 1));
 		}
 	}
 	

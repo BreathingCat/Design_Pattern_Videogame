@@ -10,34 +10,16 @@ public abstract class Armor {
 		put("COMBAT_SKILLS", new HashMap<String, Integer> ());
 	}};
 	
-	protected int resistance = 0;
-	protected int coverage = 0;
-	
 	protected String type = null;
 	protected String body_part = null;
 	
 	public Armor() {;}
 	
-	public Armor(int resistance, int coverage) {
-		this.resistance = resistance;
-		this.coverage = coverage;
-	}
-	
-	public Armor(int resistance, int coverage, Map<String, Integer> attributes, Map<String, Integer> combat_skills) {
-		
-		this(resistance, coverage);
+	public Armor(Map<String, Integer> attributes, Map<String, Integer> combat_skills) {
 		
 		this.setAttributesModifier(attributes);
 		this.setCombatSkillsModifier(combat_skills);
 
-	}
-
-	public int getResistance() {
-		return this.resistance;
-	}
-
-	public int getCoverage() {
-		return coverage;
 	}
 	
 	public String getType() {
