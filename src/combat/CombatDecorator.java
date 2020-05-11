@@ -10,8 +10,8 @@ public abstract class CombatDecorator implements CombatInterface {
 		this.component = component;
 	}
 	
-	public void combat(Character attacker, Character defender) {
-		this.component.combat(attacker, defender);
+	public boolean combat(Character attacker, Character defender) {
+		return this.component.combat(attacker, defender);
 
 	}
 

@@ -16,6 +16,7 @@ public class Poisoned_State extends Character_State{
 		if(this.activated) {
 			System.out.println(this.parent.name +" is poisoned! All attributes are reduced by 2 and receives " + this.damage_per_turn + " damage per turn");
 			System.out.println("Turns left: " + String.valueOf(this.turns_left - 1));
+			parent.damage(this.damage_per_turn);
 		}
 	}
 	

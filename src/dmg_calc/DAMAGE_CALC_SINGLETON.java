@@ -135,8 +135,9 @@ public class DAMAGE_CALC_SINGLETON {
 		int damage_reduced = (int)(total_damage * percentage_damage_reduced);
 		
 		System.out.println("Base damage: " + base_raw_damage);
+		System.out.println("Total damage: " + total_damage);
 		System.out.println("Damage reduction: " + damage_reduced);
-		System.out.println("Final damage dealt: " + (total_damage - damage_reduced));
+		System.out.println(defender.name + " receives " + (total_damage - damage_reduced) + " damage");
 
 		return total_damage - damage_reduced;
 		
@@ -175,7 +176,7 @@ public class DAMAGE_CALC_SINGLETON {
 		System.out.println("Base damage: " + base_raw_damage);
 		System.out.println("Total damage: " + total_damage);
 		System.out.println("Damage reduction: " + damage_reduced);
-		System.out.println("Final damage dealt: " + (total_damage - damage_reduced));
+		System.out.println(defender.name + " receives " + (total_damage - damage_reduced) + " damage");
 
 		return total_damage - damage_reduced;
 	}

@@ -14,9 +14,9 @@ public class DecoratorStrength extends CombatDecorator {
 		}
 	}
 	
-	public void combat(Character attacker, Character defender) {
+	public boolean combat(Character attacker, Character defender) {
 		this.combatStrength(attacker);
-		super.combat(attacker, defender);
+		return super.combat(attacker, defender);
 	}
 	
 }

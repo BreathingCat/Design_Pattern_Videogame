@@ -108,7 +108,12 @@ public class Test_Character {
 			System.out.println("Stun");
 		}*/
 		
-		test3.attack(test);
+		while(test.isAlive()) {
+			System.out.println(test.name + " is still alive with " + test.getCurrentHp() + " hp");
+			test3.attack(test);	
+		}
+		
+		System.out.println(test.name + " is dead!");
 		
 	}
 

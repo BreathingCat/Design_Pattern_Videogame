@@ -8,7 +8,7 @@ import armor.Armor;
 import armor.Factory_Medium_Armor;
 import character.Character;
 
-public class Skeleton extends Character {
+public class Skeleton extends Enemy {
 
 	public Skeleton(String name, Map<String, Integer> attributes,
 			Map<String, Integer> combat_skills) {
@@ -19,6 +19,12 @@ public class Skeleton extends Character {
 					put("TORSO", fac.getTorsoArmor());
 					put("LEG", fac.getLegArmor());
 				}});
+	}
+
+	@Override
+	public void execute_Template(Character[] player_characters) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

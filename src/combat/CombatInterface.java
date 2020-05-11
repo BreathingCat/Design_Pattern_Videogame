@@ -4,6 +4,6 @@ import character.Character;
 
 public interface CombatInterface {
 
-	public void combat(Character attacker, Character defender);
+	public boolean combat(Character attacker, Character defender);
 	
 }

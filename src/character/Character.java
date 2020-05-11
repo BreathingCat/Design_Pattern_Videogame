@@ -226,23 +226,32 @@ public abstract class Character {
 		return this.max_hp;
 	}
 	
-	private void attack_help(CombatDecorator attack, Character objective) {
+	private boolean attack_help(CombatDecorator attack, Character objective) {
 		DecoratorToughness attack_iron_skin = new DecoratorToughness(attack);	
-		attack.combat(this, objective);
+		return attack.combat(this, objective);
 	}
 	
-	public void attack(Character objective) {
+	public boolean attack(Character objective) {
 		System.out.println(this.name + " is attacking " + objective.name + "!");
 		CombatConcreteComponent attack = new CombatConcreteComponent();
 		if(this.main_weapon.getType() == "ranged") {
 			DecoratorPerception attack_accurate = new DecoratorPerception(attack);
-			this.attack_help(attack_accurate, objective);
+			return this.attack_help(attack_accurate, objective);
 		}
 		else {
 			DecoratorStrength attack_strong = new DecoratorStrength(attack);
 			DecoratorDexterity attack_precise = new DecoratorDexterity(attack_strong);
-			this.attack_help(attack_precise, objective);
+			return this.attack_help(attack_precise, objective);
 		}
 		
 	}
+	
+	public boolean isAlive() {
+		if(this.getCurrentHp() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }

@@ -14,9 +14,9 @@ public class DecoratorDexterity extends CombatDecorator {
 		}	
 	}
 	
-	public void combat(Character attacker, Character defender) {
+	public boolean combat(Character attacker, Character defender) {
 		this.combatDexterity(attacker);
-		super.combat(attacker, defender);
+		return super.combat(attacker, defender);
 	}
 	
 }
