@@ -1,6 +1,7 @@
 package character;
 
 import armor.*;
+import dmg_calc.DAMAGE_CALC_SINGLETON;
 import races.*;
 import weapon.*;
 
@@ -29,7 +30,7 @@ public class Test_Character {
 					put("HEAD", fac.getHeadArmor());
 					put("TORSO", fac.getTorsoArmor());
 					put("LEG", fac.getLegArmor());
-				}}, calc);
+				}});
 		
 		Character test2 = new Soldier("Test2", new Spear(),
 				new HashMap<String, Integer> () {{
@@ -48,7 +49,7 @@ public class Test_Character {
 					put("HEAD", fac.getHeadArmor());
 					put("TORSO", fac.getTorsoArmor());
 					put("LEG", fac.getLegArmor());
-				}}, calc);
+				}});
 		
 		Character test3 = new Ranger("Test3", new Crossbow(),
 				new HashMap<String, Integer> () {{
@@ -67,7 +68,7 @@ public class Test_Character {
 					put("HEAD", fac.getHeadArmor());
 					put("TORSO", fac.getTorsoArmor());
 					put("LEG", fac.getLegArmor());
-				}}, calc);
+				}});
 		
 		
 		
@@ -96,16 +97,18 @@ public class Test_Character {
 		// calc.attackBlocked(test, test2);
 		// calc.attackDodged(test, test2);
 		
-		calc.didHit(test3);
+		/*calc.didHit(test3);
 		calc.attackDodged(test3, test2);
 		calc.attackBlocked(test3, test2);
 		calc.computeDamage(test3, test2);
 		
-		calc.computeDamage(test, test3);
+		calc.computeDamage(test, test3);*/
 		
 		/*if(test.dmg_calculator.didStun(test)) {
 			System.out.println("Stun");
 		}*/
+		
+		test3.attack(test);
 		
 	}
 

@@ -5,6 +5,8 @@ import java.io.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import armor.*;
+import combat.*;
+import dmg_calc.DAMAGE_CALC_SINGLETON;
 import state.Character_State;
 import weapon.*;
 import state.*;
@@ -45,7 +47,7 @@ public abstract class Character {
 	protected Map<String, Character_State> state;
 	
 	// Pointer to damage calculator
-	protected DAMAGE_CALC_SINGLETON dmg_calculator;
+	public static DAMAGE_CALC_SINGLETON dmg_calculator = new DAMAGE_CALC_SINGLETON();
 	
 	// Private function to read character stats from file
 	// To ease the workload on more functions
@@ -98,10 +100,7 @@ public abstract class Character {
 	}
 	
 	public Character (String name, String race, Weapon main, 
-			Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Armor> equipment,
-			DAMAGE_CALC_SINGLETON dmg_calculator) {
-		
-		this.dmg_calculator = dmg_calculator;
+			Map<String, Integer> attributes, Map<String, Integer> combat_skills, Map<String, Armor> equipment) {
 		
 		this.name = name;
 		
@@ -225,5 +224,25 @@ public abstract class Character {
 	
 	public int getMaxHp() {
 		return this.max_hp;
+	}
+	
+	private void attack_help(CombatDecorator attack, Character objective) {
+		DecoratorToughness attack_iron_skin = new DecoratorToughness(attack);	
+		attack.combat(this, objective);
+	}
+	
+	public void attack(Character objective) {
+		System.out.println(this.name + " is attacking " + objective.name + "!");
+		CombatConcreteComponent attack = new CombatConcreteComponent();
+		if(this.main_weapon.getType() == "ranged") {
+			DecoratorPerception attack_accurate = new DecoratorPerception(attack);
+			this.attack_help(attack_accurate, objective);
+		}
+		else {
+			DecoratorStrength attack_strong = new DecoratorStrength(attack);
+			DecoratorDexterity attack_precise = new DecoratorDexterity(attack_strong);
+			this.attack_help(attack_precise, objective);
+		}
+		
 	}
 }

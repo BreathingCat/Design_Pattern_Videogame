@@ -32,7 +32,7 @@
         "TOUGHNESS": 4
       },
       "COMBAT_SKILLS": {
-        "DEFENSE": 2
+        "DEFENSE": 2,
         "ATTACK": -3
       }
     },
@@ -56,7 +56,7 @@
   "SOLDIER": {
     "SKILLS_MULT": {
       "ATTRIBUTES": {
-        "DEXTERITY": 2
+        "DEXTERITY": 2,
         "TOUGHNESS": -2
       },
       "COMBAT_SKILLS": {
@@ -66,4 +66,33 @@
     },
     "MAX_HP": 100
   },
+  "SKELETON": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+      	"TOUGHNESS": -2,
+      	"DEXTERITY": 1
+      },
+      "COMBAT_SKILLS": {
+      	"DODGE": -2,
+      	"ATTACK": 2,
+      	"DEFENSE": -2
+      }
+    },
+    "MAX_HP": 80
+  },
+  "ZOMBIE": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+      	"STRENGTH": 2,
+      	"TOUGHNESS": 2,
+      	"DEXTERITY": -5
+      },
+      "COMBAT_SKILLS": {
+      	"ATTACK": -3,
+      	"DODGE": -2,
+      	"DEFENSE": 3
+      }
+    },
+    "MAX_HP": 100
+  }
 }

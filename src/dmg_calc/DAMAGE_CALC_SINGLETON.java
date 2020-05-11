@@ -1,6 +1,8 @@
-package character;
+package dmg_calc;
 
 import java.util.*;
+
+import character.Character;
 
 // This class DOES NOT damage character. It just computes the damage
 // and returns it based on character attributes, equipment and weaponry,
@@ -41,7 +43,6 @@ public class DAMAGE_CALC_SINGLETON {
 				return true;
 			}
 			// Else is false (True negative)
-			System.out.println(defender.name + " missed dodge!");
 			return false;
 		} 
 		// Dodge succeded
@@ -52,7 +53,6 @@ public class DAMAGE_CALC_SINGLETON {
 				return true;
 			}
 			// Else is false (false positive)
-			System.out.println(defender.name + " missed dodge!");
 			return false;
 		}
 	}
@@ -86,7 +86,6 @@ public class DAMAGE_CALC_SINGLETON {
 				return true;
 			}
 			// Else is false (True negative)
-			System.out.println(defender.name + " misses block!");
 			return false;
 		} 
 		// Block succeded
@@ -97,7 +96,6 @@ public class DAMAGE_CALC_SINGLETON {
 				return true;
 			}
 			// Else is false (false positive)
-			System.out.println(defender.name + " misses block!");
 			return false;
 		}}
 
@@ -107,12 +105,12 @@ public class DAMAGE_CALC_SINGLETON {
 		
 		// Strong attack bonus
 		if(attacker.getAttributes().get("STRENGTH") >= 10) {
-			System.out.println("Strong attack bonus: " + (base_raw_damage * 0.2));
+			System.out.println("Strong attack bonus: +" + (base_raw_damage * 0.2) + " dmg");
 			additional_damage = (base_raw_damage * 0.2);
 		}
 		// Precise attack bonus
 		if(attacker.getAttributes().get("DEXTERITY") >= 10) {
-			System.out.println("Precise attack bonus: " + (base_raw_damage * 0.2));
+			System.out.println("Precise attack bonus: +" + (base_raw_damage * 0.2) + " dmg");
 			additional_damage += (base_raw_damage * 0.2);
 		}
 		
@@ -126,11 +124,11 @@ public class DAMAGE_CALC_SINGLETON {
 			deff_toughness = 0;
 		}
 		
-		double percentage_damage_reduced = (Math.log10(((double)deff_toughness)/2.0 + 1.0));
+		double percentage_damage_reduced = 0.8 * (Math.log10(((double)deff_toughness)/2.0 + 1));
 		
 		// Magistral resolve
 		if (deff_toughness >= 10) {
-			System.out.println("Iron-skin defense bonus");
+			System.out.println("Iron-skin defense bonus +20% damage reduced");
 			percentage_damage_reduced = 1.2 * percentage_damage_reduced;
 		}
 		
@@ -150,7 +148,7 @@ public class DAMAGE_CALC_SINGLETON {
 		
 		// Accurate shot
 		if(attacker.getAttributes().get("PERCEPTION") >= 10) {
-			System.out.println("Accurate shot bonus: " + (base_raw_damage * 0.2));
+			System.out.println("Accurate shot bonus: +" + (base_raw_damage * 0.2) + " dmg");
 			additional_damage = base_raw_damage * 0.2;
 		}
 		
@@ -164,17 +162,18 @@ public class DAMAGE_CALC_SINGLETON {
 			deff_toughness = 0;
 		}
 		
-		double percentage_damage_reduced = (Math.log10(((double)deff_toughness)/2.0 + 1.0));
+		double percentage_damage_reduced = 0.8 * (Math.log10(((double)deff_toughness)/2.0 + 1));
 		
 		// Magistral resolve
-		if (deff_toughness >= 7) {
-			System.out.println("Iron-skin defense bonus");
+		if (deff_toughness >= 10) {
+			System.out.println("Iron-skin defense bonus +20% reduced damage");
 			percentage_damage_reduced = 1.2 * percentage_damage_reduced;
 		}
 		
 		int damage_reduced = (int)(total_damage * percentage_damage_reduced);
 		
 		System.out.println("Base damage: " + base_raw_damage);
+		System.out.println("Total damage: " + total_damage);
 		System.out.println("Damage reduction: " + damage_reduced);
 		System.out.println("Final damage dealt: " + (total_damage - damage_reduced));
 
