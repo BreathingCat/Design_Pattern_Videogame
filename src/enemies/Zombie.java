@@ -1,6 +1,9 @@
 package enemies;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import armor.Armor;
@@ -22,22 +25,9 @@ public class Zombie extends Enemy {
 	}
 
 	@Override
-	public void execute_Template(Character[] player_characters) {
-		System.out.println(this.name + "'s turn starts!");
-		
-		if(this.current_hp > 75) {
-			System.out.println(this.name + " has a strong binding to the dark forces. Heals for 4 hp!");
-			this.heal(4);
-		} else if(this.current_hp < 25 && this.isAlive()) {
-			System.out.println(this.name + " binding is weakened! Unit degrades over time for 4 hp!");
-			this.damage(4);
-		}
-		
-		if(this.isAlive()) {
-			
-		} else {
-			System.out.println(this.name + " is dead!");
-		}
+	public void execute_Template(List<Character> player_characters) {
+		Combat_Strategy strategy = new Zombie_Strategy();
+		strategy.execute(this, new ArrayList<Character>(player_characters));
 		
 	}
 

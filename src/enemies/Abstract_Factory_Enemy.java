@@ -4,7 +4,7 @@ import character.Character;
 
 public interface Abstract_Factory_Enemy {
 
-	Character getSkeleton();
-	Character getZombie();
+	Enemy getSkeleton();
+	Enemy getZombie();
 	
 }

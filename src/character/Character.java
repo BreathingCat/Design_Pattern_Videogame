@@ -44,7 +44,7 @@ public abstract class Character {
 	}};
 	
 	// State
-	protected Map<String, Character_State> state;
+	public Map<String, Character_State> state;
 	
 	// Pointer to damage calculator
 	public static DAMAGE_CALC_SINGLETON dmg_calculator = new DAMAGE_CALC_SINGLETON();

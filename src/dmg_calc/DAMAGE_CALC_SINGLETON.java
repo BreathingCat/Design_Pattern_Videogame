@@ -138,6 +138,7 @@ public class DAMAGE_CALC_SINGLETON {
 		System.out.println("Total damage: " + total_damage);
 		System.out.println("Damage reduction: " + damage_reduced);
 		System.out.println(defender.name + " receives " + (total_damage - damage_reduced) + " damage");
+		System.out.println(defender.name + " is left with " + (defender.getCurrentHp() - (total_damage - damage_reduced)) + " hp out of " + defender.getMaxHp());
 
 		return total_damage - damage_reduced;
 		
@@ -177,6 +178,7 @@ public class DAMAGE_CALC_SINGLETON {
 		System.out.println("Total damage: " + total_damage);
 		System.out.println("Damage reduction: " + damage_reduced);
 		System.out.println(defender.name + " receives " + (total_damage - damage_reduced) + " damage");
+		System.out.println(defender.name + " is left with " + (defender.getCurrentHp() - (total_damage - damage_reduced)) + " hp out of " + defender.getMaxHp());
 
 		return total_damage - damage_reduced;
 	}

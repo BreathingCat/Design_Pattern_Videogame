@@ -1,5 +1,6 @@
 package enemies;
 
+import java.util.List;
 import java.util.Map;
 
 import armor.Armor;
@@ -13,6 +14,6 @@ public abstract class Enemy extends Character {
 		super(name, race, main, attributes, combat_skills, equipment);
 	}
 	
-	public abstract void execute_Template(Character[] player_characters);
+	public abstract void execute_Template(List<Character> player_characters);
 
 }

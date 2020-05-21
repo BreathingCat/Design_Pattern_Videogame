@@ -6,7 +6,7 @@ import character.Character;
 
 public class Factory_Enemy_Normal implements Abstract_Factory_Enemy {
 
-	public Character getSkeleton() {
+	public Enemy getSkeleton() {
 		return new Skeleton("Skeleton",
 				new HashMap<String, Integer> () {{
 					put("STRENGTH", 5);
@@ -21,7 +21,7 @@ public class Factory_Enemy_Normal implements Abstract_Factory_Enemy {
 				}});
 	}
 
-	public Character getZombie() {
+	public Enemy getZombie() {
 		return new Skeleton("Zombie",
 				new HashMap<String, Integer> () {{
 					put("STRENGTH", 5);

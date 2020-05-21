@@ -1,7 +1,10 @@
 package enemies;
 
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import weapon.Spear;
 import armor.Armor;
@@ -22,8 +25,9 @@ public class Skeleton extends Enemy {
 	}
 
 	@Override
-	public void execute_Template(Character[] player_characters) {
-		// TODO Auto-generated method stub
+	public void execute_Template(List<Character> player_characters) {
+		Combat_Strategy strategy = new Skeleton_Strategy();
+		strategy.execute(this, new ArrayList<Character>(player_characters));
 		
 	}
 
