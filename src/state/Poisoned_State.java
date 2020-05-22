@@ -4,11 +4,11 @@ import character.Character;
 
 public class Poisoned_State extends Character_State{
 
-	protected int damage_per_turn = 6;
 	protected int attributes_modifier = -2;
 	
 	public Poisoned_State (Character parent) {
 		super(parent, 2);
+		this.damage_per_turn = 2;
 	}
 
 	@Override

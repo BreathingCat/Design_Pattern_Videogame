@@ -50,8 +50,7 @@ public abstract class Character {
 	public static DAMAGE_CALC_SINGLETON dmg_calculator = new DAMAGE_CALC_SINGLETON();
 	
 	// Private function to read character stats from file
-	// To ease the workload on more functions
-  	private void getStatsFromFile(String race) {
+  	private void getCharacterStatsFromFile() {
 		JSONParser parser = new JSONParser();	
 		try {
 			JSONObject json_stats = (JSONObject)parser.parse(new FileReader(Character.char_stats));
@@ -65,6 +64,21 @@ public abstract class Character {
 			for(Iterator it = ((JSONArray)json_stats.get("COMBAT_SKILLS")).iterator(); it.hasNext();) {
 				this.stats.get("COMBAT_SKILLS").put((String)it.next(), 0);
 			}
+					
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+	}
+  	
+  	private void getRaceStatsFromFile(String race) {
+  		JSONParser parser = new JSONParser();	
+		try {
+			JSONObject json_stats = (JSONObject)parser.parse(new FileReader(Character.char_stats));
 			
 			// Racial data
 			JSONObject race_char = (JSONObject)json_stats.get(race);		
@@ -112,7 +126,8 @@ public abstract class Character {
 		this.state.put("STUN", new Stunned_State(this));
 		this.state.put("POISON", new Poisoned_State(this));
 		
-		this.getStatsFromFile(race);
+		this.getCharacterStatsFromFile();
+		this.getRaceStatsFromFile(race);
 		
 		this.stats.get("ATTRIBUTES").putAll(attributes);
 		this.stats.get("COMBAT_SKILLS").putAll(combat_skills);
@@ -226,7 +241,7 @@ public abstract class Character {
 		return this.max_hp;
 	}
 	
-	private boolean attack_help(CombatDecorator attack, Character objective) {
+	private boolean computeAttack(CombatDecorator attack, Character objective) {
 		DecoratorToughness attack_iron_skin = new DecoratorToughness(attack);	
 		return attack.combat(this, objective);
 	}
@@ -236,12 +251,12 @@ public abstract class Character {
 		CombatConcreteComponent attack = new CombatConcreteComponent();
 		if(this.main_weapon.getType() == "ranged") {
 			DecoratorPerception attack_accurate = new DecoratorPerception(attack);
-			return this.attack_help(attack_accurate, objective);
+			return this.computeAttack(attack_accurate, objective);
 		}
 		else {
 			DecoratorStrength attack_strong = new DecoratorStrength(attack);
 			DecoratorDexterity attack_precise = new DecoratorDexterity(attack_strong);
-			return this.attack_help(attack_precise, objective);
+			return this.computeAttack(attack_precise, objective);
 		}
 		
 	}
