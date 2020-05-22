@@ -184,7 +184,7 @@ public class main_game {
 		
 		System.out.println(enemies.toString());
 
-		while(new main_game().teamAlive(player_characters) || new main_game().enemyTeamAlive(enemies)) {
+		while(new main_game().teamAlive(player_characters) && new main_game().enemyTeamAlive(enemies)) {
 			// Player starts
 			for(Character player_char : player_characters) {
 				if(player_char.isAlive()) {
