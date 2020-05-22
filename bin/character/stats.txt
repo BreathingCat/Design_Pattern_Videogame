@@ -9,5 +9,90 @@
     "ATTACK",
     "DEFENSE",
     "DODGE"
-  ]
+  ],
+  "PALADIN": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "STRENGTH": 2,
+        "TOUGHNESS": 2,
+        "PERCEPTION": -5
+      },
+      "COMBAT_SKILLS": {
+        "DEFENSE": 2,
+        "DODGE": -4
+      }
+    },
+    "MAX_HP": 150
+  },
+  "CLERIC": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "PERCEPTION": -3,
+        "DEXTERITY": -2,
+        "TOUGHNESS": 4
+      },
+      "COMBAT_SKILLS": {
+        "DEFENSE": 2,
+        "ATTACK": -3
+      }
+    },
+    "MAX_HP": 120
+  },
+  "RANGER": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "STRENGTH": -3,
+        "TOUGHNESS": -2,
+        "PERCEPTION": 4
+      },
+      "COMBAT_SKILLS": {
+        "ATTACK": 5,
+        "DEFENSE": -4,
+        "DODGE": -2
+      }
+    },
+    "MAX_HP": 75
+  },
+  "SOLDIER": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+        "DEXTERITY": 2,
+        "TOUGHNESS": -2
+      },
+      "COMBAT_SKILLS": {
+        "DEFENSE": -2,
+        "DODGE": 2
+      }
+    },
+    "MAX_HP": 100
+  },
+  "SKELETON": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+      	"TOUGHNESS": -2,
+      	"DEXTERITY": 1
+      },
+      "COMBAT_SKILLS": {
+      	"DODGE": -2,
+      	"ATTACK": 2,
+      	"DEFENSE": -2
+      }
+    },
+    "MAX_HP": 80
+  },
+  "ZOMBIE": {
+    "SKILLS_MULT": {
+      "ATTRIBUTES": {
+      	"STRENGTH": 2,
+      	"TOUGHNESS": 2,
+      	"DEXTERITY": -5
+      },
+      "COMBAT_SKILLS": {
+      	"ATTACK": -3,
+      	"DODGE": -2,
+      	"DEFENSE": 3
+      }
+    },
+    "MAX_HP": 100
+  }
 }

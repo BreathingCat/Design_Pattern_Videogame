@@ -1,0 +1,31 @@
+{
+  "HEAD_ARMOR": {
+    "ATTRIBUTES": {
+      "TOUGHNESS": 1,
+      "PERCEPTION": -4
+    },
+    "COMBAT_SKILLS": {
+      "DEFENSE": 1,
+      "DODGE": -2
+    }
+  },
+  "TORSO_ARMOR": {
+    "ATTRIBUTES": {
+      "PERCEPTION": -2,
+      "TOUGHNESS": 2
+    },
+    "COMBAT_SKILLS": {
+      "DEFENSE": 1,
+      "DODGE": -2
+    }
+  },
+  "LEG_ARMOR": {
+    "ATTRIBUTES": {
+      "TOUGHNESS": 1
+    },
+    "COMBAT_SKILLS": {
+      "DEFENSE": 1,
+      "DODGE": -2
+    }
+  }
+}

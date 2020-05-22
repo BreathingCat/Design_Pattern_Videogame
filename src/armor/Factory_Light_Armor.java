@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 public class Factory_Light_Armor implements Abstract_Factory_Armor {
 
-	private final static String stats_file = "src/armor/stats/LIGHT_ARMOR.txt";
+	private final static String stats_file = "src/armor/LIGHT_ARMOR.txt";
 
 	public Armor getHeadArmor() {
 		JSONParser parser = new JSONParser();
@@ -22,8 +22,6 @@ public class Factory_Light_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the light head armor
 			// Overengineered, yes, but more memory-efficient
 			return new Head_Armor("light", 
-					((Long)head_armor_json.get("RESISTANCE")).intValue(), 
-					((Long)head_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)head_armor_json.get("ATTRIBUTES");
@@ -64,8 +62,6 @@ public class Factory_Light_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the light torso armor
 			// Overengineered, yes, but more memory-efficient
 			return new Torso_Armor("light", 
-					((Long)torso_armor_json.get("RESISTANCE")).intValue(),
-					((Long)torso_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)torso_armor_json.get("ATTRIBUTES");
@@ -106,8 +102,6 @@ public class Factory_Light_Armor implements Abstract_Factory_Armor {
 			// Reads JSON file for all attributes of the light leg armor
 			// Overengineered, yes, but more memory-efficient
 			return new Leg_Armor("light", 
-					((Long)leg_armor_json.get("RESISTANCE")).intValue(),
-					((Long)leg_armor_json.get("COVERAGE")).intValue(), 
 					// Attributes
 					new HashMap<String, Integer> () {{
 						JSONObject attributes_json = (JSONObject)leg_armor_json.get("ATTRIBUTES");

@@ -1,0 +1,62 @@
+{
+  "LONGSWORD": {
+    "DAMAGE": 35,
+    "RANGE": 3,
+    "EFFECTS": {
+      "DISORIENT": 0,
+      "BLEED": 30,
+      "STUN": 2,
+      "POISON": 0
+    }
+  },
+  "BATTLEHAMMER": {
+    "DAMAGE": 45,
+    "RANGE": 2,
+    "EFFECTS": {
+      "DISORIENT": 25,
+      "BLEED": 5,
+      "STUN": 40,
+      "POISON": 0
+    }
+  },
+  "SPEAR": {
+    "DAMAGE": 30,
+    "RANGE": 4,
+    "EFFECTS": {
+      "DISORIENT": 0,
+      "BLEED": 25,
+      "STUN": 0,
+      "POISON": 0
+    }
+  },
+  "CROSSBOW": {
+    "DAMAGE": 30,
+    "RANGE": 7,
+    "EFFECTS": {
+      "DISORIENT": 0,
+      "BLEED": 15,
+      "STUN": 0,
+      "POISON": 0
+    }
+  },
+  "DAGGER": {
+    "DAMAGE": 20,
+    "RANGE": 2,
+    "EFFECTS": {
+      "DISORIENT": 0,
+      "BLEED": 30,
+      "STUN": 2,
+      "POISON": 0
+    }
+  },
+  "MACE": {
+    "DAMAGE": 30,
+    "RANGE": 2,
+    "EFFECTS": {
+      "DISORIENT": 25,
+      "BLEED": 5,
+      "STUN": 40,
+      "POISON": 0
+    }
+  }
+}

@@ -15,7 +15,7 @@ public abstract class Weapon {
 	protected int damage = 0;
 	protected String type = null;
 	
-	protected final static String weapon_stats = "src/weapon/stats/stats.txt";
+	protected final static String weapon_stats = "src/weapon/stats.txt";
 	
 	protected Map<String, Integer> effects = new HashMap<String, Integer> ();
 	
@@ -48,6 +48,10 @@ public abstract class Weapon {
 	
 	public int getDamage() {
 		return this.damage;
+	}
+	
+	public String getType() {
+		return this.type;
 	}
 
 	public Map<String, Integer> getEffects(){
