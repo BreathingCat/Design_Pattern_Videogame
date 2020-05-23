@@ -25,15 +25,10 @@ public class Skeleton extends Enemy {
 	}
 
 	@Override
-	public void executeStrategy(List<Character> player_characters, Combat_Strategy strategy) {
+	public void execute_Template(List<Character> player_characters) {
+		Combat_Strategy strategy = new Skeleton_Strategy();
 		strategy.execute(this, new ArrayList<Character>(player_characters));
 		
-	}
-	
-	@Override
-	public boolean attack(Character objective) {
-		System.out.println("Skeleton does a spook! " + objective.name + " is spooked!");
-		return this.attackSuper(objective);
 	}
 
 }

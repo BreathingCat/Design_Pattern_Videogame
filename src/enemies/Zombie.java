@@ -25,15 +25,11 @@ public class Zombie extends Enemy {
 	}
 
 	@Override
-	public void executeStrategy(List<Character> player_characters, Combat_Strategy strategy) {
+	public void execute_Template(List<Character> player_characters) {
+		Combat_Strategy strategy = new Zombie_Strategy();
 		strategy.execute(this, new ArrayList<Character>(player_characters));
 		
 	}
 
-	@Override
-	public boolean attack(Character objective) {
-		System.out.println("Zombie growls! Smells human flesh and is hungry!");
-		return this.attackSuper(objective);
-	}	
 
 }

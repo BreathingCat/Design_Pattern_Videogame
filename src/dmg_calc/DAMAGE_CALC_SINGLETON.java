@@ -200,7 +200,7 @@ public class DAMAGE_CALC_SINGLETON {
 	}
 	
 	// Help function to avoid duplicating code
-	private boolean computeEffectChance(String effect, Character attacker) {
+	private boolean helpEffects(String effect, Character attacker) {
 		Random random = new Random();
 		
 		int prob = attacker.main_weapon.getEffects().get("STUN").intValue();
@@ -213,19 +213,19 @@ public class DAMAGE_CALC_SINGLETON {
 	}
 	
 	public boolean didStun(Character attacker) {
-		return this.computeEffectChance("STUN", attacker);
+		return this.helpEffects("STUN", attacker);
 	}
 	
 	public boolean didBleed(Character attacker) {
-		return this.computeEffectChance("BLEED", attacker);
+		return this.helpEffects("BLEED", attacker);
 	}
 	
 	public boolean didDisorient(Character attacker) {
-		return this.computeEffectChance("DISORIENT", attacker);
+		return this.helpEffects("DISORIENT", attacker);
 	}
 	
 	public boolean didPoison(Character attacker) {
-		return this.computeEffectChance("POISON", attacker);
+		return this.helpEffects("POISON", attacker);
 	}
 	
 	public boolean didHit(Character attacker) {

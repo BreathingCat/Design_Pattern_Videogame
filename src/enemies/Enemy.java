@@ -14,6 +14,6 @@ public abstract class Enemy extends Character {
 		super(name, race, main, attributes, combat_skills, equipment);
 	}
 	
-	public abstract void executeStrategy(List<Character> player_characters, Combat_Strategy strategy);
+	public abstract void execute_Template(List<Character> player_characters);
 
 }
