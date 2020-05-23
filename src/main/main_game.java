@@ -213,7 +213,13 @@ public class main_game {
 			}
 			
 			for(Enemy enemy : enemies) {
-				enemy.execute_Template(player_characters);
+				Combat_Strategy strategy = null;
+				if(enemy.getCurrentHp() < enemy.getMaxHp() / 2) {
+					strategy = new DefensiveStrategy();
+				} else {
+					strategy = new OffensiveStrategy();
+				}
+				enemy.executeStrategy(player_characters, strategy);
 			}
 		}
 		

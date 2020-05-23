@@ -3,10 +3,11 @@ package enemies;
 import character.Character;
 import java.util.ArrayList; 
 
-public class Skeleton_Strategy implements Combat_Strategy {
+public class OffensiveStrategy implements Combat_Strategy {
 
 	public void execute(Enemy character, ArrayList<Character> player_characters) {
-		System.out.println("Spooky skeleton uuu...");
+
+		System.out.println(character.name + " is eager for combat!");
 		
 		for(Character item : player_characters) {
 			if(item.isAlive()) {
