@@ -7,7 +7,6 @@ public abstract class Character_State {
 	protected int turns_left = 0;
 	protected int turn_duration = 0;
 	protected boolean activated = false;
-	protected int damage_per_turn = 0;
 	
 	protected Character parent;
 	
