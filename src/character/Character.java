@@ -231,7 +231,7 @@ public abstract class Character {
 		return attack.combat(this, objective);
 	}
 	
-	public boolean attack(Character objective) {
+	protected boolean attackSuper(Character objective) {
 		System.out.println(this.name + " is attacking " + objective.name + "!");
 		CombatConcreteComponent attack = new CombatConcreteComponent();
 		if(this.main_weapon.getType() == "ranged") {
@@ -243,7 +243,10 @@ public abstract class Character {
 			DecoratorDexterity attack_precise = new DecoratorDexterity(attack_strong);
 			return this.attack_help(attack_precise, objective);
 		}
-		
+	}
+	
+	public boolean attack(Character objective) {		
+		return this.attackSuper(objective);
 	}
 	
 	public boolean isAlive() {
