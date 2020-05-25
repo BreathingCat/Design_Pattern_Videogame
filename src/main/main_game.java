@@ -187,6 +187,10 @@ public class main_game {
 		while(new main_game().teamAlive(player_characters) || new main_game().enemyTeamAlive(enemies)) {
 			// Player starts
 			for(Character player_char : player_characters) {
+				
+				// Apply state effects
+				player_char.effectsNextTurn();
+				
 				if(player_char.isAlive()) {
 					if(player_char.state.get("STUN").getState()) {
 						System.out.println(player_char.name + " is stunned! Turn is skipped!");
