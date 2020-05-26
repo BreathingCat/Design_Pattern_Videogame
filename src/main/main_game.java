@@ -39,14 +39,6 @@ public class main_game {
 			}
 		} return true;
 	}
-	
-	public boolean enemyTeamAlive(List<Enemy> enemies) {
-		for (Character item: enemies) {
-			if(!item.isAlive()) {
-				return false;
-			}
-		} return true;
-	}
 
 	public static void main(String[] args) {
 		
@@ -55,7 +47,7 @@ public class main_game {
 		
 		List<Character> player_characters = new ArrayList<Character> ();
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 1; i++) {
 			// Name
 			System.out.println("Input name");
 			String name = "";
@@ -184,7 +176,7 @@ public class main_game {
 		
 		System.out.println(enemies.toString());
 
-		while(new main_game().teamAlive(player_characters) || new main_game().enemyTeamAlive(enemies)) {
+		while(new main_game().teamAlive(player_characters) && enemies.size() != 0) {
 			// Player starts
 			for(Character player_char : player_characters) {
 				

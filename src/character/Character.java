@@ -137,7 +137,7 @@ public abstract class Character {
 	}
 	
 	private void addRacialModifiers(String stats, Map<String, Integer> dict) {
-		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get(stats).entrySet()) {
+		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get("COMBAT_SKILLS").entrySet()) {
 			dict.put(pair.getKey(), pair.getValue() + dict.get(pair.getKey()));
 		}
 	}
@@ -164,13 +164,28 @@ public abstract class Character {
 		Map<String, Integer> modified_attr = new HashMap(this.stats.get("ATTRIBUTES"));
 		
 		// Racial modifiers
-		this.addRacialModifiers("ATTRIBUTES", modified_attr);
+		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get("ATTRIBUTES").entrySet()) {
+			modified_attr.put(pair.getKey(), pair.getValue() + modified_attr.get(pair.getKey()));
+		}
 		
 		// Equipment modifiers
-		this.addEquipmentModifiers(modified_attr);	
+		for(Map.Entry<String, Armor> armor : this.equipment.entrySet()) {
+			for(Map.Entry<String, Integer> pair : this.equipment.get(armor.getKey()).getAttributesModifier().entrySet()) {
+				modified_attr.put(pair.getKey(), pair.getValue() + modified_attr.get(pair.getKey()));
+			}
+		}		
 		
 		// State modifiers
-		this.addStateModifiers(modified_attr);
+		for(Map.Entry<String, Character_State> pair : this.state.entrySet()) {
+			if(pair.getValue().getState() && pair.getValue().getAttributesModifier() != 0) {
+				
+				int modifier = pair.getValue().getAttributesModifier();
+				
+				for(Map.Entry<String, Integer> pair_attr : modified_attr.entrySet()) {
+					modified_attr.put(pair_attr.getKey(), pair_attr.getValue() + modifier);
+				}
+			}
+		}
 		
 		return modified_attr;
 	}
@@ -179,14 +194,28 @@ public abstract class Character {
 		Map<String, Integer> modified_combat_skills = new HashMap(this.stats.get("COMBAT_SKILLS"));
 		
 		// Racial modifier
-		this.addRacialModifiers("COMBAT_SKILLS", modified_combat_skills);
+		for(Map.Entry<String, Integer> pair : this.racial_stats_mult.get("COMBAT_SKILLS").entrySet()) {
+			modified_combat_skills.put(pair.getKey(), pair.getValue() + modified_combat_skills.get(pair.getKey()));
+		}
 		
 		// Equipment modifiers
-		this.addEquipmentModifiers(modified_combat_skills);
+		for(Map.Entry<String, Armor> armor : this.equipment.entrySet()) {
+			for(Map.Entry<String, Integer> pair : this.equipment.get(armor.getKey()).getCombatSkillsModifier().entrySet()) {
+				modified_combat_skills.put(pair.getKey(), pair.getValue() + modified_combat_skills.get(pair.getKey()));
+			}
+		}
 		
 		// State modifiers
-		this.addStateModifiers(modified_combat_skills);
-		
+		for(Map.Entry<String, Character_State> pair : this.state.entrySet()) {
+			if(pair.getValue().getState() && pair.getValue().getCombatSkillsModifier() != 0) {
+				
+				int modifier = pair.getValue().getCombatSkillsModifier();
+				
+				for(Map.Entry<String, Integer> pair_combat : modified_combat_skills.entrySet()) {
+					modified_combat_skills.put(pair_combat.getKey(), pair_combat.getValue() + modifier);
+				}
+			}
+		}
 		return modified_combat_skills;
 	}
 
